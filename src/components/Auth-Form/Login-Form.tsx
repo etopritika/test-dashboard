@@ -1,15 +1,19 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuthStore from "@/store/auth-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormSchema, loginSchema } from "./schema";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
 
 const LoginForm: React.FC<{ onSwitchToRegister: () => void }> = ({
   onSwitchToRegister,
 }) => {
   const router = useRouter();
+  const [formError, setFormError] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
   const {
     register,
     handleSubmit,
@@ -26,11 +30,11 @@ const LoginForm: React.FC<{ onSwitchToRegister: () => void }> = ({
     const result = login(email, password);
 
     if (result.success) {
-      alert("Login successful!");
+      setFormError(null);
       router.push("/dashboard");
       reset();
     } else {
-      alert(result.message);
+      setFormError(result.message);
     }
   };
 
@@ -51,18 +55,29 @@ const LoginForm: React.FC<{ onSwitchToRegister: () => void }> = ({
           {errors.email && (
             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
           )}
+          {formError && (
+            <p className="text-red-500 text-sm mt-1">{formError}</p>
+          )}
         </div>
 
-        <div className="mb-4">
+        <div className="mb-4 relative">
           <label className="block text-gray-700">Password</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             {...register("password")}
             className={`w-full border p-2 rounded ${
               errors.password ? "border-red-500" : "border-gray-300"
             }`}
             placeholder="Your password"
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute top-8 right-3 text-gray-500"
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? <EyeOff size={24} /> : <Eye size={24} />}
+          </button>
           {errors.password && (
             <p className="text-red-500 text-sm mt-1">
               {errors.password.message}
