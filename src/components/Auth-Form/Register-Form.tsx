@@ -4,12 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterFormSchema, registerSchema } from "./schema";
 import useAuthStore from "@/store/auth-store";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
 
 const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
   onSwitchToLogin,
 }) => {
   const router = useRouter();
   const [formError, setFormError] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const {
     register,
@@ -76,16 +78,24 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
         </div>
 
         {/* Password Field */}
-        <div className="mb-4">
+        <div className="mb-4 relative">
           <label className="block text-gray-700">Password</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             {...register("password")}
             className={`w-full border p-2 rounded ${
               errors.password ? "border-red-500" : "border-gray-300"
             }`}
             placeholder="Your password"
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute top-8 right-3 text-gray-500"
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? <EyeOff size={24} /> : <Eye size={24} />}
+          </button>
           {errors.password && (
             <p className="text-red-500 text-sm mt-1">
               {errors.password.message}
