@@ -51,7 +51,7 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
             className={`w-full border p-2 rounded ${
               errors.name ? "border-red-500" : "border-gray-300"
             }`}
-            placeholder="Your name"
+            placeholder="John Doe"
           />
           {errors.name && (
             <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
@@ -67,7 +67,7 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
             className={`w-full border p-2 rounded ${
               errors.email ? "border-red-500" : "border-gray-300"
             }`}
-            placeholder="Your email"
+            placeholder="example@mail.com"
           />
           {errors.email && (
             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
@@ -104,10 +104,10 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
         </div>
 
         {/* Confirm Password Field */}
-        <div className="mb-4">
+        <div className="mb-4 relative">
           <label className="block text-gray-700">Confirm Password</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             {...register("confirmPassword")}
             className={`w-full border p-2 rounded ${
               errors.confirmPassword ? "border-red-500" : "border-gray-300"

@@ -50,7 +50,7 @@ const LoginForm: React.FC<{ onSwitchToRegister: () => void }> = ({
             className={`w-full border p-2 rounded ${
               errors.email ? "border-red-500" : "border-gray-300"
             }`}
-            placeholder="Your email"
+            placeholder="example@mail.com"
           />
           {errors.email && (
             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
