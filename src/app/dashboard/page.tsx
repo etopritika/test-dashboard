@@ -1,7 +1,15 @@
-export default function Dashboard() {
+import AuthWrapper from "@/components/Auth-Wrapper";
+import Logout from "@/components/Logout";
+
+function Dashboard() {
   return (
-    <section>
-      <span>Dashboard Page</span>
-    </section>
+    <AuthWrapper>
+      <section>
+        <h1>Приватна сторінка: Dashboard</h1>
+        <Logout />
+      </section>
+    </AuthWrapper>
   );
 }
+
+export default Dashboard;
