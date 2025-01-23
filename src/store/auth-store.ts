@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type User = {
+  name: string;
   email: string;
   password: string;
 };
@@ -10,6 +11,7 @@ interface AuthState {
   users: User[];
   currentUser: User | null;
   register: (
+    name: string,
     email: string,
     password: string
   ) => { success: boolean; message: string };
@@ -26,7 +28,7 @@ const useAuthStore = create<AuthState>()(
       users: [],
       currentUser: null,
 
-      register: (email, password) => {
+      register: (name, email, password) => {
         const users = get().users;
         const isExistingUser = users.some((user) => user.email === email);
 
@@ -37,7 +39,7 @@ const useAuthStore = create<AuthState>()(
           };
         }
 
-        const newUser: User = { email, password };
+        const newUser: User = { name, email, password };
         set({ users: [...users, newUser] });
 
         return { success: true, message: "User successfully registered!" };

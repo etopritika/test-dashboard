@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterFormSchema, registerSchema } from "./schema";
@@ -9,6 +9,8 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
   onSwitchToLogin,
 }) => {
   const router = useRouter();
+  const [formError, setFormError] = useState<string | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -21,16 +23,16 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
   const { register: registerUser, login } = useAuthStore();
 
   const onSubmit = (data: RegisterFormSchema) => {
-    const { email, password } = data;
-    const result = registerUser(email, password);
+    const { email, password, name } = data;
+    const result = registerUser(name, email, password);
 
     if (result.success) {
-      alert("Registration successful!");
+      setFormError(null);
       login(email, password);
       router.push("/dashboard");
       reset();
     } else {
-      alert(result.message);
+      setFormError(result.message);
     }
   };
 
@@ -38,6 +40,23 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
     <div className="max-w-lg w-full p-6 bg-white rounded shadow">
       <h2 className="text-2xl font-bold mb-4 text-center">Registration</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
+        {/* Name Field */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Name</label>
+          <input
+            type="text"
+            {...register("name")}
+            className={`w-full border p-2 rounded ${
+              errors.name ? "border-red-500" : "border-gray-300"
+            }`}
+            placeholder="Your name"
+          />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+          )}
+        </div>
+
+        {/* Email Field */}
         <div className="mb-4">
           <label className="block text-gray-700">Email</label>
           <input
@@ -51,8 +70,12 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
           {errors.email && (
             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
           )}
+          {formError && (
+            <p className="text-red-500 text-sm mt-1">{formError}</p>
+          )}
         </div>
 
+        {/* Password Field */}
         <div className="mb-4">
           <label className="block text-gray-700">Password</label>
           <input
@@ -70,6 +93,7 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
           )}
         </div>
 
+        {/* Confirm Password Field */}
         <div className="mb-4">
           <label className="block text-gray-700">Confirm Password</label>
           <input
@@ -86,7 +110,7 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
             </p>
           )}
         </div>
-
+        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
@@ -95,6 +119,7 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
         </button>
       </form>
 
+      {/* Switch to Login */}
       <div className="text-center mt-4">
         <button
           type="button"
