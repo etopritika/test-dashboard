@@ -1,0 +1,55 @@
+[
+  {
+    "year": 2022,
+    "months": [
+      { "month": "03", "losses": 3900 },
+      { "month": "04", "losses": 5800 },
+      { "month": "05", "losses": 7200 },
+      { "month": "06", "losses": 5050 },
+      { "month": "07", "losses": 5280 },
+      { "month": "08", "losses": 7320 },
+      { "month": "09", "losses": 11260 },
+      { "month": "10", "losses": 12860 },
+      { "month": "11", "losses": 16970 },
+      { "month": "12", "losses": 17280 }
+    ]
+  },
+  {
+    "year": 2023,
+    "months": [
+      { "month": "01", "losses": 21700 },
+      { "month": "02", "losses": 21470 },
+      { "month": "03", "losses": 24100 },
+      { "month": "04", "losses": 16970 },
+      { "month": "05", "losses": 17410 },
+      { "month": "06", "losses": 20500 },
+      { "month": "07", "losses": 17820 },
+      { "month": "08", "losses": 16800 },
+      { "month": "09", "losses": 15080 },
+      { "month": "10", "losses": 22920 },
+      { "month": "11", "losses": 28550 },
+      { "month": "12", "losses": 29970 }
+    ]
+  },
+  {
+    "year": 2024,
+    "months": [
+      { "month": "01", "losses": 26220 },
+      { "month": "02", "losses": 28450 },
+      { "month": "03", "losses": 28200 },
+      { "month": "04", "losses": 26960 },
+      { "month": "05", "losses": 38940 },
+      { "month": "06", "losses": 35030 },
+      { "month": "07", "losses": 35680 },
+      { "month": "08", "losses": 36810 },
+      { "month": "09", "losses": 38130 },
+      { "month": "10", "losses": 41980 },
+      { "month": "11", "losses": 45720 },
+      { "month": "12", "losses": 48670 }
+    ]
+  },
+  {
+    "year": 2025,
+    "months": [{ "month": "01", "losses": 36020 }]
+  }
+]
