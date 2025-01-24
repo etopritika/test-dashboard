@@ -1,12 +1,28 @@
 import AuthWrapper from "@/components/Auth-Wrapper";
-import Logout from "@/components/Logout";
+import Chart from "@/components/Chart";
+import fetchChartData from "@/lib/api";
 
-function Dashboard() {
+async function Dashboard() {
+  const { monthlyData, totalLossesData, error } = await fetchChartData();
+
+  if (error) {
+    return (
+      <AuthWrapper>
+        <section>
+          <h1 className="sr-only">Dashboard Page</h1>
+          <div className="flex justify-center items-center h-screen">
+            <span className="text-red-500 text-lg">{error}</span>
+          </div>
+        </section>
+      </AuthWrapper>
+    );
+  }
+
   return (
     <AuthWrapper>
       <section>
-        <h1>Приватна сторінка: Dashboard</h1>
-        <Logout />
+        <h1 className="sr-only">Dashboard Page</h1>
+        <Chart monthlyData={monthlyData!} totalLossesData={totalLossesData!} />
       </section>
     </AuthWrapper>
   );
