@@ -1,6 +1,6 @@
-import { ProcessedData, YearlyData } from "./types";
+import { ProcessedData, TableData, YearlyData } from "./types";
 
-export default async function fetchChartData(): Promise<{
+export async function fetchChartData(): Promise<{
   monthlyData: ProcessedData | null;
   totalLossesData: ProcessedData | null;
   error: string | null;
@@ -12,7 +12,7 @@ export default async function fetchChartData(): Promise<{
     );
 
     if (!res.ok) {
-      throw new Error();
+      throw new Error("Failed to fetch chart data");
     }
 
     const rawData: YearlyData[] = await res.json();
@@ -40,7 +40,28 @@ export default async function fetchChartData(): Promise<{
     return {
       monthlyData: null,
       totalLossesData: null,
-      error: "Failed to retrieve data",
+      error: "Failed to retrieve chart data",
     };
+  }
+}
+
+export async function fetchTableData(): Promise<{
+  tableData: TableData | null;
+  error: string | null;
+}> {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SITE_URL || ""}/tableData.json`,
+      { cache: "no-store" }
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch table data");
+    }
+
+    const tableData: TableData = await res.json();
+    return { tableData, error: null };
+  } catch {
+    return { tableData: null, error: "Failed to retrieve table data" };
   }
 }
