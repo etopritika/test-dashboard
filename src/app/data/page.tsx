@@ -1,6 +1,6 @@
 export default function Data() {
   return (
-    <section>
+    <section className="py-4">
       <span>Data Page</span>
     </section>
   );
