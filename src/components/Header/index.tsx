@@ -1,0 +1,45 @@
+"use client";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+import Navigation from "./Navigation";
+import UserInfo from "./UserInfo";
+import { ChartNoAxesCombined, Menu } from "lucide-react";
+import Link from "next/link";
+import Sidebar from "./Sidebar";
+
+export default function Header() {
+  const pathname = usePathname();
+  const shouldHideHeader = pathname === "/login";
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  if (shouldHideHeader) {
+    return null;
+  }
+
+  return (
+    <>
+      <header className="w-full text-white py-3 flex justify-between items-center">
+        {/* <div className="sm:hidden flex items-center"> */}
+        <button
+          onClick={() => setIsSidebarOpen(true)}
+          className="p-2 sm:hidden"
+          aria-label="Open menu"
+        >
+          <Menu size={24} />
+        </button>
+        {/* </div> */}
+
+        <div className="hidden sm:flex text-lg font-semibold space-x-6 items-center">
+          <Link href={"/"}>
+            <ChartNoAxesCombined size={40} />
+          </Link>
+          <Navigation />
+        </div>
+
+        <UserInfo />
+      </header>
+
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+    </>
+  );
+}

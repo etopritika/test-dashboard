@@ -8,7 +8,7 @@ async function Dashboard() {
   if (error) {
     return (
       <AuthWrapper>
-        <section>
+        <section className="py-4">
           <h1 className="sr-only">Dashboard Page</h1>
           <div className="flex justify-center items-center h-screen">
             <span className="text-red-500 text-lg">{error}</span>
@@ -20,7 +20,7 @@ async function Dashboard() {
 
   return (
     <AuthWrapper>
-      <section>
+      <section className="py-4">
         <h1 className="sr-only">Dashboard Page</h1>
         <Chart monthlyData={monthlyData!} totalLossesData={totalLossesData!} />
       </section>
