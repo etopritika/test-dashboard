@@ -1,6 +1,6 @@
 import AuthWrapper from "@/components/Auth-Wrapper";
 import Chart from "@/components/Chart";
-import fetchChartData from "@/lib/api";
+import { fetchChartData } from "@/lib/api";
 
 async function Dashboard() {
   const { monthlyData, totalLossesData, error } = await fetchChartData();
