@@ -1,7 +1,6 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import useAuthStore from "@/store/auth-store";
 
 interface AuthWrapperProps {
   children: React.ReactNode;
@@ -12,18 +11,23 @@ function AuthWrapper({
   children,
   redirectIfAuthenticated = false,
 }: AuthWrapperProps) {
+  const [currentUser, setCurrentUser] = useState(null);
   const router = useRouter();
-  const currentUser = useAuthStore((state) => state.currentUser);
 
   useEffect(() => {
-    if (!currentUser && !redirectIfAuthenticated) {
+    const storedAuth = localStorage.getItem("auth-storage");
+    const parsedAuth = storedAuth ? JSON.parse(storedAuth) : null;
+
+    setCurrentUser(parsedAuth?.state?.currentUser || null);
+
+    if (!parsedAuth?.state?.currentUser && !redirectIfAuthenticated) {
       router.replace("/login");
-    } else if (currentUser && redirectIfAuthenticated) {
+    } else if (parsedAuth?.state?.currentUser && redirectIfAuthenticated) {
       router.replace("/dashboard");
     }
-  }, [currentUser, router, redirectIfAuthenticated]);
+  }, [redirectIfAuthenticated, router]);
 
-  if (!currentUser && !redirectIfAuthenticated) {
+  if (currentUser === null && !redirectIfAuthenticated) {
     return null;
   }
 
