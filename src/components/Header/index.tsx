@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Navigation from "./Navigation";
-import UserInfo from "./UserInfo";
+import UserInfo from "./User-Info";
 import { ChartNoAxesCombined, Menu } from "lucide-react";
 import Link from "next/link";
 import Sidebar from "./Sidebar";
@@ -19,7 +19,6 @@ export default function Header() {
   return (
     <>
       <header className="w-full text-white py-3 flex justify-between items-center">
-        {/* <div className="sm:hidden flex items-center"> */}
         <button
           onClick={() => setIsSidebarOpen(true)}
           className="p-2 sm:hidden"
@@ -27,7 +26,6 @@ export default function Header() {
         >
           <Menu size={24} />
         </button>
-        {/* </div> */}
 
         <div className="hidden sm:flex text-lg font-semibold space-x-6 items-center">
           <Link href={"/"}>
