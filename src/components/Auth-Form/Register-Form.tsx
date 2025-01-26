@@ -5,6 +5,7 @@ import { RegisterFormSchema, registerSchema } from "./schema";
 import useAuthStore from "@/store/auth-store";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
+import { create } from "@/lib/actions";
 
 const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
   onSwitchToLogin,
@@ -24,11 +25,16 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
 
   const { register: registerUser, login } = useAuthStore();
 
-  const onSubmit = (data: RegisterFormSchema) => {
+  const onSubmit = async (data: RegisterFormSchema) => {
     const { email, password, name } = data;
     const result = registerUser(name, email, password);
 
-    if (result.success) {
+    if (result.success && result.user) {
+      await create({
+        name: result.user.name,
+        email: result.user.email,
+        password: result.user.password,
+      });
       setFormError(null);
       login(email, password);
       router.push("/dashboard");
