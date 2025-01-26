@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormSchema, loginSchema } from "./schema";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
+import { create } from "@/lib/actions";
 
 const LoginForm: React.FC<{ onSwitchToRegister: () => void }> = ({
   onSwitchToRegister,
@@ -25,11 +26,17 @@ const LoginForm: React.FC<{ onSwitchToRegister: () => void }> = ({
 
   const { login } = useAuthStore();
 
-  const onSubmit = (data: LoginFormSchema) => {
+  const onSubmit = async (data: LoginFormSchema) => {
     const { email, password } = data;
     const result = login(email, password);
 
-    if (result.success) {
+    if (result.success && result.user) {
+      await create({
+        name: result.user.name,
+        email: result.user.email,
+        password: result.user.password,
+      });
+
       setFormError(null);
       router.push("/dashboard");
       reset();

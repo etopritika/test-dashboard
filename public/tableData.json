@@ -1,0 +1,59 @@
+[
+  {
+    "date": "25.01.2025",
+    "losses": [
+      { "category": "Tanks", "count": 9859 },
+      { "category": "AFV", "count": 20545 },
+      { "category": "Artillery systems", "count": 22309 },
+      { "category": "MLRS", "count": 1263 },
+      { "category": "Air defense systems", "count": 1050 },
+      { "category": "Planes", "count": 369 },
+      { "category": "Helicopters", "count": 331 },
+      { "category": "UAVs", "count": 23213 },
+      { "category": "Cruise missiles", "count": 3053 },
+      { "category": "Ships/boats", "count": 28 },
+      { "category": "Submarines", "count": 1 },
+      { "category": "Vehicles and fuel tanks", "count": 35071 },
+      { "category": "Special equipment", "count": 3715 },
+      { "category": "Personnel", "count": 828470 }
+    ]
+  },
+  {
+    "date": "24.01.2025",
+    "losses": [
+      { "category": "Tanks", "count": 9852 },
+      { "category": "AFV", "count": 20508 },
+      { "category": "Artillery systems", "count": 22295 },
+      { "category": "MLRS", "count": 1263 },
+      { "category": "Air defense systems", "count": 1050 },
+      { "category": "Planes", "count": 369 },
+      { "category": "Helicopters", "count": 331 },
+      { "category": "UAVs", "count": 23162 },
+      { "category": "Cruise missiles", "count": 3051 },
+      { "category": "Ships/boats", "count": 28 },
+      { "category": "Submarines", "count": 1 },
+      { "category": "Vehicles and fuel tanks", "count": 34992 },
+      { "category": "Special equipment", "count": 3715 },
+      { "category": "Personnel", "count": 826820 }
+    ]
+  },
+  {
+    "date": "23.01.2025",
+    "losses": [
+      { "category": "Tanks", "count": 9850 },
+      { "category": "AFV", "count": 20497 },
+      { "category": "Artillery systems", "count": 22256 },
+      { "category": "MLRS", "count": 1262 },
+      { "category": "Air defense systems", "count": 1050 },
+      { "category": "Planes", "count": 369 },
+      { "category": "Helicopters", "count": 331 },
+      { "category": "UAVs", "count": 23111 },
+      { "category": "Cruise missiles", "count": 3051 },
+      { "category": "Ships/boats", "count": 28 },
+      { "category": "Submarines", "count": 1 },
+      { "category": "Vehicles and fuel tanks", "count": 34905 },
+      { "category": "Special equipment", "count": 3714 },
+      { "category": "Personnel", "count": 825320 }
+    ]
+  }
+]

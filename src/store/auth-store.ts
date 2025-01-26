@@ -9,11 +9,11 @@ interface AuthState {
     name: string,
     email: string,
     password: string
-  ) => { success: boolean; message: string };
+  ) => { success: boolean; message: string; user: User | null };
   login: (
     email: string,
     password: string
-  ) => { success: boolean; message: string };
+  ) => { success: boolean; message: string; user: User | null };
   logout: () => void;
 }
 
@@ -31,13 +31,18 @@ const useAuthStore = create<AuthState>()(
           return {
             success: false,
             message: "A user with this email already exists!",
+            user: null,
           };
         }
 
         const newUser: User = { name, email, password };
-        set({ users: [...users, newUser] });
+        set({ users: [...users, newUser], currentUser: newUser });
 
-        return { success: true, message: "User successfully registered!" };
+        return {
+          success: true,
+          message: "User successfully registered!",
+          user: newUser,
+        };
       },
 
       login: (email, password) => {
@@ -48,10 +53,14 @@ const useAuthStore = create<AuthState>()(
 
         if (user) {
           set({ currentUser: user });
-          return { success: true, message: "Login successful!" };
+          return { success: true, message: "Login successful!", user };
         }
 
-        return { success: false, message: "Invalid email or password." };
+        return {
+          success: false,
+          message: "Invalid email or password.",
+          user: null,
+        };
       },
 
       logout: () => {

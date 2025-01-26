@@ -5,6 +5,7 @@ import { RegisterFormSchema, registerSchema } from "./schema";
 import useAuthStore from "@/store/auth-store";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
+import { create } from "@/lib/actions";
 
 const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
   onSwitchToLogin,
@@ -24,11 +25,16 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
 
   const { register: registerUser, login } = useAuthStore();
 
-  const onSubmit = (data: RegisterFormSchema) => {
+  const onSubmit = async (data: RegisterFormSchema) => {
     const { email, password, name } = data;
     const result = registerUser(name, email, password);
 
-    if (result.success) {
+    if (result.success && result.user) {
+      await create({
+        name: result.user.name,
+        email: result.user.email,
+        password: result.user.password,
+      });
       setFormError(null);
       login(email, password);
       router.push("/dashboard");
@@ -42,7 +48,6 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
     <div className="max-w-lg w-full p-6 bg-white rounded shadow">
       <h2 className="text-2xl font-bold mb-4 text-center">Registration</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* Name Field */}
         <div className="mb-4">
           <label className="block text-gray-700">Name</label>
           <input
@@ -58,7 +63,6 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
           )}
         </div>
 
-        {/* Email Field */}
         <div className="mb-4">
           <label className="block text-gray-700">Email</label>
           <input
@@ -77,7 +81,6 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
           )}
         </div>
 
-        {/* Password Field */}
         <div className="mb-4 relative">
           <label className="block text-gray-700">Password</label>
           <input
@@ -103,7 +106,6 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
           )}
         </div>
 
-        {/* Confirm Password Field */}
         <div className="mb-4 relative">
           <label className="block text-gray-700">Confirm Password</label>
           <input
@@ -120,7 +122,6 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
             </p>
           )}
         </div>
-        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
@@ -129,7 +130,6 @@ const RegisterForm: React.FC<{ onSwitchToLogin: () => void }> = ({
         </button>
       </form>
 
-      {/* Switch to Login */}
       <div className="text-center mt-4">
         <button
           type="button"

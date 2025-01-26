@@ -3,12 +3,14 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import useAuthStore from "@/store/auth-store";
+import { removeUserCookie } from "@/lib/actions";
 
 const LogoutButton: React.FC = () => {
   const { logout } = useAuthStore();
   const router = useRouter();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await removeUserCookie();
     logout();
     router.push("/login");
   };
