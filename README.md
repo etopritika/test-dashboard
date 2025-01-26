@@ -1,10 +1,10 @@
-# Application README
+# Updated README
 
 ## Project Overview
 
 This application is a simple table and chart management tool built with modern web development technologies. Users can filter, sort, and edit data within a table. The project demonstrates the use of client-side state management, modals for editing and deleting data, and a flexible architecture that allows for future extensibility.
 
-**Note**: This application does not have a backend. All data is stored and managed locally on the client side.
+**Note**: This application does not have a backend. All data is stored and managed locally on the client side or fetched from static files.
 
 ---
 
@@ -46,6 +46,21 @@ The application leverages the following technologies:
 - **Other Tools**:
   - CSS modules and utility classes for styling.
   - Local storage and cookies for data persistence.
+  - Environment variables for managing site configuration.
+
+---
+
+## Environment Variables
+
+The application uses an environment variable to configure the base URL for fetching static data:
+
+- `NEXT_PUBLIC_SITE_URL`: Base URL for fetching `chartsData.json` and `tableData.json`. Defaults to `http://localhost:3000`.
+
+Example `.env` file:
+
+```env
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
 
 ---
 
@@ -71,7 +86,7 @@ src/
 │
 ├── lib/                       # Utility functions and types
 │   ├── actions.ts             # Client-side action handlers
-│   ├── api.ts                 # Placeholder for API functions
+│   ├── api.ts                 # Data fetching functions
 │   ├── types.ts               # Type definitions
 │
 ├── providers/                 # Global providers (e.g., modal context)
@@ -89,16 +104,17 @@ src/
 
 ### Data Storage
 
-- All data is stored locally in memory or cookies. No backend is involved.
+- All data is either hardcoded or fetched from static files (`chartsData.json`, `tableData.json`).
 - Users’ credentials and session data are managed using cookies for authentication.
 
 ### Key Components
 
 1. **Table**: Displays data with sorting, filtering, and action buttons (Edit/Delete).
-2. **Modals**:
+2. **Charts**: Displays processed data trends using `Recharts`.
+3. **Modals**:
    - `EditModal`: Allows users to modify or delete data entries.
    - `ModalContainer`: Provides a consistent UI wrapper for modal content.
-3. **State Management**:
+4. **State Management**:
    - `auth-store.ts`: Manages user authentication and session state.
    - Local state (`useState`) handles table and form states.
 
@@ -121,8 +137,12 @@ src/
    ```bash
    npm install
    ```
-3. Run the development server:
+3. Create a `.env` file in the root of the project and add the following:
+   ```env
+   NEXT_PUBLIC_SITE_URL=http://localhost:3000
+   ```
+4. Run the development server:
    ```bash
    npm run dev
    ```
-4. Open the application in your browser at `http://localhost:3000`.
+5. Open the application in your browser at `http://localhost:3000`.
