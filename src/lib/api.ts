@@ -7,8 +7,7 @@ export async function fetchChartData(): Promise<{
 }> {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SITE_URL || ""}/chartsData.json`,
-      { cache: "no-store" }
+      `${process.env.NEXT_PUBLIC_SITE_URL || ""}/chartsData.json`
     );
 
     if (!res.ok) {
@@ -51,8 +50,7 @@ export async function fetchTableData(): Promise<{
 }> {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SITE_URL || ""}/tableData.json`,
-      { cache: "no-store" }
+      `${process.env.NEXT_PUBLIC_SITE_URL || ""}/tableData.json`
     );
 
     if (!res.ok) {
