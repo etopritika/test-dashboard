@@ -1,5 +1,3 @@
-# Updated README
-
 ## Project Overview
 
 This application is a simple table and chart management tool built with modern web development technologies. Users can filter, sort, and edit data within a table. The project demonstrates the use of client-side state management, modals for editing and deleting data, and a flexible architecture that allows for future extensibility.
