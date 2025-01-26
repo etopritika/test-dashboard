@@ -110,7 +110,6 @@ export default function Table({ initialTableData }: TableProps) {
         )}
       />
 
-      {/* Таблиця */}
       <table className="min-w-full border-collapse border border-gray-300 bg-gray-200">
         <thead>
           <tr>
@@ -137,10 +136,7 @@ export default function Table({ initialTableData }: TableProps) {
         </thead>
         <tbody>
           {filteredData.map((row, index) => (
-            <tr
-              key={index}
-              className={index % 2 === 0 ? "bg-gray-100" : ""} // Додаємо фон для непарних і парних рядків
-            >
+            <tr key={index} className={index % 2 === 0 ? "bg-gray-100" : ""}>
               <td className="border px-4 py-2">{row.category}</td>
               <td className="border px-4 py-2">{row.count.toLocaleString()}</td>
               <td className="border px-4 py-2 text-center">
