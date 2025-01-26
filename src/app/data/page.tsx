@@ -17,7 +17,7 @@ async function Data() {
   return (
     <section className="py-4">
       <h1 className="sr-only">Data Page</h1>
-      <Table tableData={tableData!} />
+      <Table initialTableData={tableData!} />
     </section>
   );
 }
