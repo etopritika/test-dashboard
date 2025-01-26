@@ -62,7 +62,7 @@ export default function Table({ initialTableData }: TableProps) {
                     ...day,
                     losses: day.losses.map((loss) =>
                       loss.category === category
-                        ? { category: newCategory, count: newCount }
+                        ? { ...loss, category: newCategory, count: newCount }
                         : loss
                     ),
                   };
@@ -103,11 +103,7 @@ export default function Table({ initialTableData }: TableProps) {
         setSearchQuery={setSearchQuery}
         filter={filter}
         setFilter={setFilter}
-        availableCategories={Array.from(
-          new Set(
-            tableData.flatMap((day) => day.losses.map((row) => row.category))
-          )
-        )}
+        losses={selectedDay?.losses || []}
       />
 
       <table className="min-w-full border-collapse border border-gray-300 bg-gray-200">

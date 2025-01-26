@@ -1,9 +1,11 @@
+import { Losses } from "@/lib/types";
+
 type TableFiltersProps = {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   filter: string;
   setFilter: (filter: string) => void;
-  availableCategories: string[];
+  losses: Losses[];
 };
 
 const TableFilters: React.FC<TableFiltersProps> = ({
@@ -11,7 +13,7 @@ const TableFilters: React.FC<TableFiltersProps> = ({
   setSearchQuery,
   filter,
   setFilter,
-  availableCategories,
+  losses,
 }) => {
   return (
     <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:justify-between sm:items-center mb-4">
@@ -28,7 +30,7 @@ const TableFilters: React.FC<TableFiltersProps> = ({
         className="border p-2 rounded"
       >
         <option value="">All Categories</option>
-        {availableCategories.map((category) => (
+        {losses.map(({ category }) => (
           <option key={category} value={category}>
             {category}
           </option>
