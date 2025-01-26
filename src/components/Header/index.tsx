@@ -28,7 +28,7 @@ export default function Header() {
         </button>
 
         <div className="hidden sm:flex text-lg font-semibold space-x-6 items-center">
-          <Link href={"/"}>
+          <Link href={"/dashboard"}>
             <ChartNoAxesCombined size={40} />
           </Link>
           <Navigation />
